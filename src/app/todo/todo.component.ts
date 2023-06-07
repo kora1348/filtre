@@ -31,53 +31,28 @@ export class TodoComponent implements OnInit {
     }
   }
 
-  //   filterByPlan() {
-  //   this.tarificationTitre = this.todoService.PLN_PLC.filter(item => {
-  //     return item.PLN_SVM.some(svm => {
-  //       return svm.PLN.some(plan => plan.PLAN === parseInt(this.planFilter));
-  //     });
-  //   }).map(item => {
-  //     item.PLN_SVM = item.PLN_SVM.filter(svm => {
-  //       return svm.PLN.some(plan => plan.PLAN === parseInt(this.planFilter));
-  //     });
-  //     return item;
-  //   });
-  // }
-  
+
   filterByPlan() {
-    if (this.planFilter && this.planFilter !== '0') {
-      this.tarificationTitre = this.todoService.PLN_PLC.filter(item => {
-        return item.PLN_SVM.some(svm => {
-          return svm.PLN.some(plan => plan.PLAN === parseInt(this.planFilter));
+    if (this.planFilter) {
+      this.tarificationTitre = JSON.parse(JSON.stringify( this.todoService.PLN_PLC)).filter((item:any) => {
+        return item.PLN_SVM.some((svm:any) => {
+          return svm.PLN.some(
+            (plan:any) => plan.PLAN === parseInt(this.planFilter)
+          );
         });
-      }).map(item => {
-        item.PLN_SVM = item.PLN_SVM.filter(svm => {
-          return svm.PLN.some(plan => plan.PLAN === parseInt(this.planFilter));
+      }).map((item:any) => {
+        item.PLN_SVM = item.PLN_SVM.filter((svm:any) => {
+          return svm.PLN.some(
+            (plan:any) => plan.PLAN === parseInt(this.planFilter)
+          );
         });
         return item;
       });
     } else {
       this.tarificationTitre = this.todoService.PLN_PLC;
     }
+  
+  
   }
-  
-
-  
-  
-  
- 
-  
-  
-  
-  
-
-  
-  
-  
-
-
-  
-  
-  
   
 }
