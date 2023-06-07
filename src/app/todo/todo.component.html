@@ -1,0 +1,50 @@
+<div class="container text-center">
+    <h2 class="pt-3 pb-3">HTML Table</h2>
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-sm-6 col-md-4">
+            <div class="mb-2 d-flex align-items-center">
+                <label for="place" class="mr-2" style="margin-right: 4px;">Place</label>
+                <input type="text" id="place" name="place" class="form-control w-60" [(ngModel)]="placeFilter" (ngModelChange)="filterByPlace()" placeholder="Filtrer par PLACE">
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4">
+            <div class="mb-2 d-flex align-items-center">
+                <!-- Plan -->
+                <label for="plan" class="mr-2" style="margin-right: 4px;">Plan</label>
+                <input type="text" id="plan" name="plan" class="form-control w-60" [(ngModel)]="planFilter" (ngModelChange)="filterByPlan()" placeholder="Filtrer par PLAN">
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <table class="mb-5">
+        <tr>
+            <th>Tarif Client 1</th>
+            <th>SVM</th>
+            <th>ISIN</th>
+            <th>Nom</th>
+            <th>Place</th>
+        </tr>
+        <ng-container *ngFor="let plnPlcInfo of tarificationTitre">
+            <tr class="text-center">
+                <td scope="col" colspan="3"></td>
+                <td style="font-weight: 800">{{ plnPlcInfo.PLACELABEL }} ({{ plnPlcInfo.PLACECODE }}) </td>
+                <td scope="col" colspan="3"></td>
+            </tr>
+            <ng-container *ngFor="let svmInfo of plnPlcInfo.PLN_SVM">
+                <tr class="text-center">
+                    <td> {{ svmInfo.PLN[0].PLAN }}</td>
+                    <td scope="col">{{ svmInfo.SVM }}</td>
+                    <td scope="col">{{ svmInfo.ISIN }}</td>
+                    <td scope="col">{{ svmInfo.LABEL }}</td>
+                    <td scope="col">{{ plnPlcInfo.PLACELABEL }}</td>
+                </tr>
+            </ng-container>
+        </ng-container>
+    </table>
+</div>
